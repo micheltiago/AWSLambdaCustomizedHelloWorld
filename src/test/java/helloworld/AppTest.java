@@ -9,8 +9,11 @@ import static org.junit.Assert.*;
 public class AppTest {
     @Test
     public void successfulResponse() {
+
+        final String MSG = "{ \"message\": \"hello world\", \"location\": \"%s\" }";
+
         App app = new App();
-        GatewayRequest request = new GatewayRequest("http://checkip.amazonaws.com");
+        GatewayRequest request = new GatewayRequest("http://checkip.amazonaws.com",MSG);
 
         GatewayResponse result = app.handleRequest(request, null);
 
@@ -27,8 +30,12 @@ public class AppTest {
 
     @Test
     public void errorResponse() {
+
+        final String MSG = "{ \"message\": \"hello world\", \"location\": \"%s\" }";
+
         App app = new App();
-        GatewayRequest request = new GatewayRequest("http://localhost");
+        GatewayRequest request = new GatewayRequest("http://localhost",MSG);
+
         GatewayResponse response = app.handleRequest(request, null);
 
         Object expected = 500;

@@ -21,20 +21,21 @@ public class AppTest {
 
         assertEquals(expected, result.getStatusCode());
         assertEquals(result.getHeaders().get("Content-Type"), "application/json");
+
         String content = result.getBody();
+
         assertNotNull(content);
         assertTrue(content.contains("\"message\""));
         assertTrue(content.contains("\"hello world\""));
         assertTrue(content.contains("\"location\""));
+        assertTrue(content.contains("\"189.6.250.96\""));
     }
 
     @Test
     public void errorResponse() {
 
-        final String MSG = "{ \"message\": \"hello world\", \"location\": \"%s\" }";
-
         App app = new App();
-        GatewayRequest request = new GatewayRequest("http://localhost",MSG);
+        GatewayRequest request = new GatewayRequest("http://localhost","");
 
         GatewayResponse response = app.handleRequest(request, null);
 

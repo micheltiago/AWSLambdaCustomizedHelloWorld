@@ -1,2 +1,3 @@
 # AWSLambdaCustomizedHelloWorld
-AWS Java Lambda
+
+Exemplo simples utilizadão função AWS Java Lambda.

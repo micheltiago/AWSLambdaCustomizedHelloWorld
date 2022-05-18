@@ -1,7 +1,7 @@
 package helloworld;
 
-import helloworld.dto.GatewayRequest;
-import helloworld.dto.GatewayResponse;
+import helloworld.dto.ProxyRequest;
+import helloworld.dto.ProxyResponse;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -13,9 +13,9 @@ public class AppTest {
         final String MSG = "{ \"message\": \"hello world\", \"location\": \"%s\" }";
 
         App app = new App();
-        GatewayRequest request = new GatewayRequest("http://checkip.amazonaws.com",MSG);
+        ProxyRequest request = new ProxyRequest("http://checkip.amazonaws.com",MSG);
 
-        GatewayResponse result = app.handleRequest(request, null);
+        ProxyResponse result = app.handleRequest(request, null);
 
         Object expected = 200;
 
@@ -32,12 +32,24 @@ public class AppTest {
     }
 
     @Test
-    public void errorResponse() {
+    public void errorInvalidHost() {
 
         App app = new App();
-        GatewayRequest request = new GatewayRequest("http://localhost","");
+        ProxyRequest request = new ProxyRequest("http://localhost","");
 
-        GatewayResponse response = app.handleRequest(request, null);
+        ProxyResponse response = app.handleRequest(request, null);
+
+        Object expected = 500;
+
+        assertEquals(expected, response.getStatusCode());
+    }
+
+    @Test
+    public void errorRequestNull() {
+
+        App app = new App();
+
+        ProxyResponse response = app.handleRequest(null, null);
 
         Object expected = 500;
 

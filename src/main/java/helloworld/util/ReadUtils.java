@@ -1,6 +1,6 @@
 package helloworld.util;
 
-import helloworld.dto.GatewayResponse;
+import helloworld.dto.ProxyResponse;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -28,8 +28,8 @@ public class ReadUtils {
         return headers;
     }
 
-    public static GatewayResponse createResponse(String body, Map<String, String> headers, int statusCode) {
-        return GatewayResponse
+    public static ProxyResponse createResponse(String body, Map<String, String> headers, int statusCode) {
+        return ProxyResponse
                 .builder()
                 .body(body)
                 .headers(headers)
